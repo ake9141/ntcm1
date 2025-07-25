@@ -1,8 +1,8 @@
-import { messagingApi } from '@line/bot-sdk';
+import { messagingApi } from "@line/bot-sdk";
 
-import {lineMessage, replyflex } from "@/app/api/line/line-message";
+import { lineMessage, replyflex } from "@/app/api/line/line-message";
 
-import userRepository from "@/repository/user_repository"
+import userRepository from "@/repository/user_repository";
 import { NextResponse } from "next/server";
 
 const config = {
@@ -14,31 +14,23 @@ const client = new messagingApi.MessagingApiClient(config);
 
 //const repo = new userRepository();
 async function lineHandleEvents(event: any) {
-
-
   const lineId = event.source.userId;
   const repo = new userRepository();
-  const {data,error} = await repo.findByLineId(lineId);
- 
+  //const { data, error } = await repo.findByLineId(lineId);
+
   if (event.type == "message") {
     const text = event.message.text;
 
-     if (data === null) {
-        if (text == "/register") {
-          return replyflex(
-      client,
-      event,
-      `ลงทะเบียนสมาชิก`,
-      "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
-    );
+    if (text == "/register") {
+      return replyflex(
+        client,
+        event,
+        `ลงทะเบียนสมาชิก`,
+        "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
+      );
+    }
   }
-    
-  }
-}
 
-
-
-  
   /*
   const {data,error} = await repo.findByLineId(lineId);
 

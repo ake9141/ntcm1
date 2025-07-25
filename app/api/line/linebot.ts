@@ -18,8 +18,9 @@ async function lineHandleEvents(event: any) {
   
   const {data,error} = await repo.findByLineId(lineId);
 
+  console.log("data", event.message.text);
 
-
+  
   if (event.type == "message") {
     const text = event.message.text;
    // const twoChar = text.trimEnd().slice(-2);
@@ -40,7 +41,7 @@ async function lineHandleEvents(event: any) {
       client,
       event,
       `ลงทะเบียนสมาชิก`,
-      "https://4e16ec1ed676.ngrok-free.app/auth/sign-up"
+      "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
     );
           
         } else {

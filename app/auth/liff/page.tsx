@@ -68,6 +68,14 @@ export default function Page() {
         className="w-full rounded border px-3 py-2 bg-gray-100"
       />
 
+       <input
+        type="text"
+        name="displayName"
+        placeholder="Your Name"
+         value={profile.displayName}
+        className="w-full rounded border px-3 py-2"
+      />
+
       <input
         type="email"
         name="email"

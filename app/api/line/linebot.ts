@@ -18,30 +18,22 @@ async function lineHandleEvents(event: any) {
   const repo = new userRepository();
   const { data, error } = await repo.findByLineId(lineId);
 
-  if (event.type == "message") {
+ 
     const text = event.message.text;
-    return await client.replyMessage({
+    return  await client.replyMessage({
       replyToken: event.replyToken,
       messages: [
         {
           type: "text",
-          text: `You said2: ${lineId}`,
+          text: `You said: ${event.type}`,
         },
       ],
     });
-  }
+  
 
   // Check if the user exists in the repository
 
-  return await client.replyMessage({
-    replyToken: event.replyToken,
-    messages: [
-      {
-        type: "text",
-        text: `You said: ${lineId}`,
-      },
-    ],
-  });
+ 
 
   /*
   const {data,error} = await repo.findByLineId(lineId);

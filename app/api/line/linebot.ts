@@ -1,4 +1,4 @@
-import * as line from "@line/bot-sdk";
+import { messagingApi } from '@line/bot-sdk';
 
 import {lineMessage, replyflex } from "@/app/api/line/line-message";
 
@@ -10,18 +10,23 @@ const config = {
   channelSecret: process.env.LINE_CHANNEL_SECRET!,
 };
 
-const client = new line.Client(config);
-const repo = new userRepository();
+const client = new messagingApi.MessagingApiClient(config);
+//const repo = new userRepository();
 async function lineHandleEvents(event: any) {
   
   const lineId = event.source.userId;
 
-  return client.replyMessage(event.replyToken, [
-            {
-              type: "text",
-              text: `${lineId}`,
-            },
-          ]);
+  return await client.replyMessage({
+  replyToken: event.replyToken,
+  messages: [
+    {
+      type: 'text',
+      text: `You said: ${event.message.text}`,
+    },
+  ],
+});
+  
+  
   /*
   const {data,error} = await repo.findByLineId(lineId);
 

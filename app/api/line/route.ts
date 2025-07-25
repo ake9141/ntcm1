@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       ok: true,
-      tokenSet: !!token,
+      tokenSet: token,
       echo,
     });
   } catch (error) {

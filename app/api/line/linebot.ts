@@ -22,21 +22,20 @@ async function lineHandleEvents(event: any) {
  
   if (event.type == "message") {
     const text = event.message.text;
+
+     if (data === null) {
+        if (text == "/register") {
+          return replyflex(
+      client,
+      event,
+      `ลงทะเบียนสมาชิก`,
+      "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
+    );
     
   }
 
 
 
-  return await client.replyMessage({
-  replyToken: event.replyToken,
-  messages: [
-    {
-      type: 'text',
-      text: `You said: ${lineId}`,
-    },
-  ],
-});
-  
   
   /*
   const {data,error} = await repo.findByLineId(lineId);

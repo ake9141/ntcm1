@@ -24,7 +24,7 @@ async function lineHandleEvents(event: any) {
     const text = event.message.text;
   }
 
-
+// Check if the user exists in the repository
 
   return await client.replyMessage({
   replyToken: event.replyToken,

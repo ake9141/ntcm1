@@ -22,6 +22,12 @@ async function lineHandleEvents(event: any) {
  
   if (event.type == "message") {
     const text = event.message.text;
+     return replyflex(
+      client,
+      event,
+      `ลงทะเบียนสมาชิก`,
+      "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
+    );
   }
 
 // Check if the user exists in the repository

@@ -22,7 +22,7 @@ async function lineHandleEvents(event: any) {
  
   if (event.type == "message") {
     const text = event.message.text;
-     return replyflex(
+     return await replyflex(
       client,
       event,
       `ลงทะเบียนสมาชิก`,

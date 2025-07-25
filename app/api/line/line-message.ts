@@ -36,7 +36,7 @@ export function reply(client: any, event: any, text: any) {
   ]);
 }
 
-export function replyflex(client: any, event: any, title: string, url: string) {
+export async function replyflex(client: any, event: any, title: string, url: string) {
   
 
   

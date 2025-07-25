@@ -13,6 +13,29 @@ const config = {
 
 const client = new line.Client(config); */
 
+export async function GET(req: NextRequest) {
+  try {
+    // สำหรับทดสอบว่า env ใช้ได้ไหม
+    const token = process.env.LINE_CHANNEL_ACCESS_TOKEN;
+
+    console.log("LINE_TOKEN =", token);
+
+    // ดึง query มาดู (ถ้าต้องการ)
+    const { searchParams } = new URL(req.url);
+    const echo = searchParams.get('echo') || 'Hello from GET';
+
+    return NextResponse.json({
+      ok: true,
+      tokenSet: !!token,
+      echo,
+    });
+  } catch (error) {
+    console.error('GET test error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+
 export async function POST(req: NextRequest) {
   try {
 

@@ -31,8 +31,10 @@ async function lineHandleEvents(event: any) {
       `ลงทะเบียนสมาชิก`,
       "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
     );
+  }
     
   }
+}
 
 
 

@@ -37,9 +37,57 @@ export function reply(client: any, event: any, text: any) {
   ]);
 }
 
+
+export async function pushFlex(client: messagingApi.MessagingApiClient,event:any, title: string, url: string) {
+  return await client.pushMessage({
+    to: event.source.userId,
+    messages: [
+      {
+        type: "flex",
+        altText: "This is a Flex message",
+        contents: {
+          type: "bubble",
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "text",
+                text: title,
+                weight: "bold",
+                size: "xl",
+              },
+              {
+                type: "text",
+                text: "กดปุ่มเพื่อลงทะเบียนสมาชิก",
+              },
+            ],
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "button",
+                style: "primary",
+                action: {
+                  type: "uri",
+                  label: "เปิดโปรแกรม",
+                  uri: url,
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
+  });
+}
+
+
 export async function replyFlex(client: messagingApi.MessagingApiClient,event:any, title: string, url: string) {
   return await client.replyMessage({
-    replyToken: event.replyToken,
+    replyToken: event.source.us,
     messages: [
       {
         type: "flex",

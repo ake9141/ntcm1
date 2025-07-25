@@ -26,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="stylesheet" href="/output.css" />
-      </head>
+ 
 
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider

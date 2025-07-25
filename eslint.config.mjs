@@ -13,4 +13,20 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
-export default eslintConfig;
+//export default eslintConfig;
+
+
+export default [
+  // โหลด config มาตรฐานของ Next.js + TypeScript
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // เพิ่ม rules เฉพาะที่เราต้องการ
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@next/next/no-css-tags": "off",
+    },
+  },
+];

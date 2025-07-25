@@ -1,6 +1,6 @@
 import * as line from "@line/bot-sdk";
 
-import {lineMessage, lineRegister, replyflex } from "@/app/api/line/line-message";
+import {lineMessage, replyflex } from "@/app/api/line/line-message";
 
 import userRepository from "@/repository/user_repository"
 import { NextResponse } from "next/server";

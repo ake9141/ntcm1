@@ -11,10 +11,13 @@ const config = {
 };
 
 const client = new messagingApi.MessagingApiClient(config);
+
 //const repo = new userRepository();
 async function lineHandleEvents(event: any) {
+
+
   
-  const lineId = event.source.userId;
+  //const lineId = event.source.userId;
 
   return await client.replyMessage({
   replyToken: event.replyToken,
@@ -84,8 +87,8 @@ async function lineHandleEvents(event: any) {
   }*/
 }
 
-function lineConfig() {
+/*function lineConfig() {
   return line.middleware(config);
-}
+}*/
 
-export { lineHandleEvents, lineConfig };
+export { lineHandleEvents };

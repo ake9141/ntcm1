@@ -46,22 +46,15 @@ export async function POST(req: NextRequest) {
     const parsedBody = JSON.parse(body);
     const events = parsedBody.events;
 
-    // Handle events asynchronously
+
     const results = await Promise.all(
       events.map(async (event: any) => {
-      
-        lineHandleEvents(event);
-       /* if (event.type === 'message' && event.message.type === 'text') {
-          // Reply to the user
-          return client.replyMessage(event.replyToken, {
-            type: 'text',
-            text: `You said: ${event.message.text}`,
-          });
-        }*/
+        return await lineHandleEvents(event); // ✅ return
       })
     );
 
-     console.log(process.env.LINE_CHANNEL_ACCESS_TOKEN)
+  
+    //console.log(process.env.LINE_CHANNEL_ACCESS_TOKEN)
 
     return NextResponse.json(results, { status: 200 });
   } catch (error) {

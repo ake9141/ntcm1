@@ -15,7 +15,14 @@ const repo = new userRepository();
 async function lineHandleEvents(event: any) {
   
   const lineId = event.source.userId;
-  
+
+  return client.replyMessage(event.replyToken, [
+            {
+              type: "text",
+              text: `${lineId}`,
+            },
+          ]);
+  /*
   const {data,error} = await repo.findByLineId(lineId);
 
   console.log("data", event.message.text);
@@ -69,7 +76,7 @@ async function lineHandleEvents(event: any) {
         }
       }
     }
-  }
+  }*/
 }
 
 function lineConfig() {

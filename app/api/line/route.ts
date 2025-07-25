@@ -38,6 +38,8 @@ export async function POST(req: NextRequest) {
       })
     );
 
+     console.log(process.env.LINE_CHANNEL_ACCESS_TOKEN)
+
     return NextResponse.json(results, { status: 200 });
   } catch (error) {
     console.error('Error handling LINE events:', error);

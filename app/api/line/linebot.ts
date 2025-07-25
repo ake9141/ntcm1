@@ -16,15 +16,23 @@ const client = new messagingApi.MessagingApiClient(config);
 async function lineHandleEvents(event: any) {
 
 
-  
-  //const lineId = event.source.userId;
+  const lineId = event.source.userId;
+  const repo = new userRepository();
+  const {data,error} = await repo.findByLineId(lineId);
+ 
+  if (event.type == "message") {
+    const text = event.message.text;
+    
+  }
+
+
 
   return await client.replyMessage({
   replyToken: event.replyToken,
   messages: [
     {
       type: 'text',
-      text: `You said: ${event.message.text}`,
+      text: `You said: ${lineId}`,
     },
   ],
 });

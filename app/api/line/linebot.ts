@@ -1,6 +1,6 @@
 import { messagingApi } from "@line/bot-sdk";
 
-import { lineMessage, replyflex } from "@/app/api/line/line-message";
+import { lineMessage, replyFlex} from "@/app/api/line/line-message";
 
 import userRepository from "@/repository/user_repository";
 import { NextResponse } from "next/server";
@@ -20,15 +20,12 @@ async function lineHandleEvents(event: any) {
 
   if (event.type === "message") {
     const text = event.message.text;
-    return  await client.replyMessage({
-      replyToken: event.replyToken,
-      messages: [
-        {
-          type: "text",
-          text: `You said: ${event.type}`,
-        },
-      ],
-    });
+    return  await replyFlex(
+      client,
+      event,
+      `ลงทะเบียนสมาชิก`,
+      "https://ntcm1-ake5nenes-projects.vercel.app/auth/sign-up"
+    );
   }
   
 

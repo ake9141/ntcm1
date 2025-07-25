@@ -1,4 +1,5 @@
 import { IProfile } from "@/models/profile";
+import { messagingApi } from "@line/bot-sdk";
 
 import userRepository from "@/repository/user_repository";
 
@@ -36,53 +37,50 @@ export function reply(client: any, event: any, text: any) {
   ]);
 }
 
-export async function replyflex(client: any, event: any, title: string, url: string) {
-  
-
-  
-  
-  
-  return client.replyMessage(event.replyToken, [
-    {
-      type: "flex",
-      altText: "This is a Flex message",
-      contents: {
-        type: "bubble",
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: title,
-              weight: "bold",
-              size: "xl",
-            },
-            {
-              type: "text",
-              text: "กดปุ่มเพื่อลงทะเบียนสมาชิก",
-            },
-          ],
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "button",
-              style: "primary",
-              action: {
-                type: "uri",
-                label: "เปิดโปรแกรม",
-                uri: url,
+export async function replyFlex(client: messagingApi.MessagingApiClient,event:any, title: string, url: string) {
+  return await client.replyMessage({
+    replyToken: event.replyToken,
+    messages: [
+      {
+        type: "flex",
+        altText: "This is a Flex message",
+        contents: {
+          type: "bubble",
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "text",
+                text: title,
+                weight: "bold",
+                size: "xl",
               },
-            },
-          ],
+              {
+                type: "text",
+                text: "กดปุ่มเพื่อลงทะเบียนสมาชิก",
+              },
+            ],
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "button",
+                style: "primary",
+                action: {
+                  type: "uri",
+                  label: "เปิดโปรแกรม",
+                  uri: url,
+                },
+              },
+            ],
+          },
         },
       },
-    },
-    
-  ]);
+    ],
+  });
 }
 
 export function getName(text: string) {

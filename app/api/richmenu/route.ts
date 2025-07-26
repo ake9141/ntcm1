@@ -92,3 +92,45 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
+
+
+
+export async function DELETE() {
+  try {
+    // STEP 1: Get all rich menus
+    const listRes = await fetch(`${LINE_API_BASE}/richmenu/list`, {
+      method: "GET",
+      headers,
+    });
+
+    const listJson = await listRes.json();
+    if (!listRes.ok) throw listJson;
+
+    const { richmenus } = listJson;
+    if (!richmenus || richmenus.length === 0) {
+      return NextResponse.json({ message: "No richmenus found." });
+    }
+
+    const deleted = [];
+
+    // STEP 2: Loop and delete each rich menu
+    for (const menu of richmenus) {
+      const res = await fetch(`${LINE_API_BASE}/richmenu/${menu.richMenuId}`, {
+        method: "DELETE",
+        headers,
+      });
+
+      if (res.ok) {
+        deleted.push(menu.richMenuId);
+      } else {
+        const err = await res.text();
+        console.error(`Failed to delete ${menu.richMenuId}:`, err);
+      }
+    }
+
+    return NextResponse.json({ success: true, deleted });
+  } catch (error: any) {
+    console.error("Error deleting richmenus:", error);
+    return NextResponse.json({ error: error.message || error }, { status: 500 });
+  }
+}

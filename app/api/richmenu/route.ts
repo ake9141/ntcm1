@@ -18,14 +18,12 @@ export async function GET() {
 
    const imagePath = path.join(process.cwd(), "public/images", "richmenu.png");
    const imageBuffer = fs.readFileSync(imagePath);
-  console.log("Image path:", imageBuffer);
-
   
 
 
   const data = await res.json();
 
-  return NextResponse.json(imageBuffer);
+  return NextResponse.json(data);
 }
 
 export async function POST(req: NextRequest) {
@@ -63,10 +61,13 @@ export async function POST(req: NextRequest) {
 
     const richMenuId = createJson.richMenuId;
 
+    console.log("Rich Menu created with ID:", richMenuId);
+
     // STEP 2: Upload Image
     const imagePath = path.join(process.cwd(), "public/images", "richmenu.png");
     console.log("Image path:", imagePath);
     const imageBuffer = fs.readFileSync(imagePath);
+    console.log("Image buffer size:", imageBuffer.length); // ขนาดไฟล์
     const uploadRes = await fetch(`${LINE_API_BASE}/richmenu/${richMenuId}/content`, {
       method: "POST",
       headers: {
@@ -78,6 +79,7 @@ export async function POST(req: NextRequest) {
 
     if (!uploadRes.ok) {
       const err = await uploadRes.text();
+      console.log(err);
       throw new Error("Image upload failed: " + err);
     }
 

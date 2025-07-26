@@ -16,6 +16,13 @@ export async function GET() {
     headers,
   });
 
+   const imagePath = path.join(process.cwd(), "public/images", "richmenu.png");
+   const imageBuffer = fs.readFileSync(imagePath);
+  console.log("Image path:", imageBuffer);
+
+  
+
+
   const data = await res.json();
 
   return NextResponse.json(data);
@@ -58,6 +65,7 @@ export async function POST(req: NextRequest) {
 
     // STEP 2: Upload Image
     const imagePath = path.join(process.cwd(), "public/images", "richmenu.png");
+    console.log("Image path:", imagePath);
     const imageBuffer = fs.readFileSync(imagePath);
     const uploadRes = await fetch(`${LINE_API_BASE}/richmenu/${richMenuId}/content`, {
       method: "POST",
